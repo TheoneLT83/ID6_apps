@@ -1,39 +1,39 @@
-# NBT Evo ID6 apps
+# iDriveDeck
 
-Connect your parked car to a computer over wired ENET. Open an AI agent with terminal access on that computer and give it this repository and [AgentReadMe.md](AgentReadMe.md). The agent identifies your head unit, checks compatibility, and installs your chosen apps under **My Vehicle**.
+Vehicle gauges, tuning controls, diagnostics, and more under **My Vehicle** on BMW NBT Evo ID6 and EntryNav2.
 
+[Download v0.7.18 for macOS or Windows](https://github.com/inotbarnacle/iDriveDeck/releases/tag/installer-v0.7.18) · [Installation guide](Installer.md) · [Change notes](CHANGELOG.md)
 
-## Unsupported firmware? Run the Trio Compatibility Collector
+## NBT Evo ID6
 
-If your version is unsupported, enable temporary SSH with Bavarian SSH Client first. Run the [Trio Compatibility Collector](source/tools/trio-collector/Quick%20Start.md) and email the ZIP it creates to [nordicbmwdealer@gmail.com](mailto:nordicbmwdealer@gmail.com) so we can get a fix to you quickly.
+Choose **NBT Evo** in the desktop installer. **Install** gives you the standard iDrive menus. **Install full-screen apps** gives each app its own entry under **My Vehicle**. Open an entry to go directly to its full-screen dashboard. Turn the iDrive knob to highlight a control and press it to select.
 
-## Desktop installer (beta)
+Full-screen mode detects 800 × 480, 960 × 480, 1280 × 480, 1440 × 540 or 1920 × 720 and uses the matching layout. The bundle includes BoostDeck, ShiftDeck, WarmDeck, LaunchDeck, Engine Fault Codes, Road Jet, BEAMer and your choice of MHD+ Suite, Bootmod3 Suite, or MG Flasher. HybridDeck and experimental xDrive Control are optional.
 
-[Download the macOS or Windows installer](https://github.com/inotbarnacle/ID6_apps_prerelease/releases/tag/installer-v0.7.6). Follow the [setup, install, and uninstall guide](Installer.md). Temporary SSH must be enabled before opening the installer.
+| Bootmod3 Suite | MG Flasher |
+| --- | --- |
+| ![Bootmod3 Suite full-screen on ID6](images/bootmod3-fullscreen.png) | ![MG Flasher full-screen on an 800 × 480 ID6 display](images/mg-flasher-fullscreen.png) |
 
-[NBTApps](https://github.com/tom-pryor/nbtapps) also distributes these apps through its [community catalogue](https://github.com/tom-pryor/nbtapps-packages). The v0.7.5 release includes the package handoff for the catalogue maintainer. Check your firmware against the [compatibility matrix](source/docs/COMPATIBILITY.md) before installing. HUD Gauges and xDrive Control are experimental. **HUD Gauges are unavailable whenever native NBT-AAD (Android Auto) is installed**, even while Android Auto is stopped.
+## EntryNav2 (early beta)
 
-The installer also offers [@st1ng’s CarPlay Advanced](https://github.com/st1ng/nbtevo-carplay-advanced) in HUD-only mode for turn-by-turn directions. It downloads the original release and runs its installer as a separate operation.
+The same macOS and Windows installer now includes 12 native EntryNav2 menus. Choose **EntryNav2 (early beta)** and enter the head unit IP and its existing SSH password over wired ENET. The installer selects matching builds for W2408C1R, Q2051B1R and C1643D1R, with a beta fallback for unrecognized framework pairs. EntryNav2 uses the native iDrive view under **My Vehicle** on 1280 × 480 displays.
 
-## iDrive 6 compatibility
+The available apps include BoostDeck, ShiftDeck, WarmDeck, LaunchDeck, HybridDeck, Engine Fault Codes, Road Jet, BEAMer, MHD+ Suite, Bootmod3 Suite, MG Flasher, and experimental xDrive Control. Vehicle data and tuning functions depend on the corresponding ECU and tune.
 
-The porting workflow can be used to evaluate any iDrive 6 version. Prebuilt packages target the verified reference firmware and framework combination documented in the AgentReadMe. Other versions need a compatibility check and may need a car-specific build. HUD Gauges also requires a compatible factory windshield HUD.
+## Replacing older apps and future updates
 
-## Tell your agent what to install
+The new installer backs up and removes the previous iDriveDeck or ID6Apps menus that it manages, then installs your selected set. Select every app you want to keep. Record the backup location and restart iDrive after installation. HUD Gauges is retired from the installer.
 
-Choose **MHD+ Suite**, **Bootmod3 Suite**, or **MG Flasher**. [Download the dashboard package](packages/dashboard.zip). Also say whether to install **xDrive Control** and **HUD Gauges**. Both are experimental.
-
-> My car is parked, iDrive is awake, and this computer is connected over wired ENET. Follow the AgentReadMe to install BoostDeck, ShiftDeck, and Engine Fault Codes. My tuning menu choice is **[MHD+ Suite / Bootmod3 Suite / MG Flasher]**. My xDrive Control (experimental) choice is **[yes / no]**. My HUD Gauges choice is **[yes / no]**. Verify firmware, framework hashes, and display resolution before uploading. Ask me when temporary SSH or a parked restart is needed.
-
-[Quick Start](Quick%20Start.md) · [Uninstall](AgentReadMe.md#uninstall) · [Change notes](CHANGELOG.md) · [Native source](source/)
+Full-screen ID6 adds **My Vehicle → ID6 App Updates**. That menu will be used for future signed USB app updates. Use the desktop installer for this release.
 
 ## Features
+
 
 - **BoostDeck** has nine configurable gauges. Open **OPTIONS → BoostDeck settings** to set pressure (psi, bar, or kPa), speed (mph or km/h), and temperature (°F or °C) independently, or switch between bars and circular dials. Picking a value returns to settings and shows the saved choice. **Configure gauges** and **Engine profile** are in the same menu. Gasoline and diesel keep separate gauge assignments.
 - **BoostDeck alerts** use fresh vehicle readings while the dashboard is open. Set separate coolant and oil-temperature limits from 220–260 °F in 5 °F steps, or a low oil-pressure limit from 5–25 psi in 5 psi steps. The choices show in your selected units. Each starts off. Choose **Screen only** or **Screen + soft chime** under **Alert mode**. Units, dial style, thresholds, and alert mode survive an iDrive restart.
 - **WarmDeck** shows engine oil, coolant, and transmission temperatures, with targets of 85, 75, and 40 °C. It estimates the warm-up time when current readings show a rising trend, and displays an advisory RPM guide while warming up. It reads only while open. The temperature targets are WarmDeck's display thresholds. [WarmDeck package](packages/warmdeck.zip)
 - **LaunchDeck** times 0–60 and 60–130 mph or 0–100 and 100–200 km/h. The menu shows a green **Ready** check, **Measuring** during a run, and the last three results for each mode. Display resolution is 0.01 s, with measurement precision limited by OBD speed sampling. [LaunchDeck package](packages/launchdeck.zip)
-- **ShiftDeck** displays live speed, an RPM bar, and shift lights with a selectable RPM threshold. Press **OPTIONS** to switch between mph and km/h. This update includes performance improvements.
+- **ShiftDeck** displays live speed, an RPM bar, and shift lights with a selectable RPM threshold. Press **OPTIONS** to switch between mph and km/h. The readout updates in 10 RPM steps. The shift-light target is adjustable from 6,000 to 8,000 RPM in 100 RPM steps.
 - **MHD+ Suite** offers four map slots and puts **Exhaust Flap** and **Max Cooling** under **Options**. The main screen shows the last map and Max Cooling settings accepted by the DME during the current app session.
 - **HybridDeck** displays plug-in hybrid battery charge, health, power, voltage, current, and temperatures. [HybridDeck package](packages/hybriddeck.zip)
 - **MG Flasher** offers map slots, burble slots, and Max Cooling. [MG Flasher package](packages/mgflasher.zip)
@@ -42,13 +42,13 @@ Choose **MHD+ Suite**, **Bootmod3 Suite**, or **MG Flasher**. [Download the dash
 - **Engine Fault Codes** reads engine/DME fault codes and shows descriptions when available. After a confirmed clear, it rereads the fault memory and reports codes that remain. Park with ignition on and the engine off before confirming a clear.
 - **Road Jet**. A simple game that makes a jet move based on throttle input and steering angle. [Road Jet package](packages/road-jet.zip)
 - **BEAMer** offers Front, Rear, Both, and Insane lighting patterns in Park at zero speed. Tested on an F3x car. Other Fxx cars may work if they have the supported lighting module. Gxx has not been tested. [BEAMer package](packages/beamer.zip)
-- **HUD Gauges** projects a live curved tachometer and numeric boost in PSI onto the factory windshield HUD. The tach spans 0–8,000 RPM, with a thicker redline zone starting at 6,700 RPM. Enable **My Vehicle → HUD Gauges → Show HUD gauges** to keep the display on after leaving the menu for the current iDrive session. Uncheck it to clear the display. The overlay yields when it detects factory navigation guidance. [HUD Gauges package](packages/hud-gauges.zip)
 
 ## Contributors and credits
 
 - **MG Flasher** branding in the tuning menu comes from [MG Flasher](https://mgflasher.com/).
 - **Ivan Hryhoriev** contributed the original WarmDeck prototype and warm-up dashboard design.
-- **CarPlay Advanced HUD** was created by [@st1ng](https://github.com/st1ng). The optional installer uses st1ng’s original release. [CarPlay Advanced source and license](https://github.com/st1ng/nbtevo-carplay-advanced)
+- **EntryNav2** builds draw on the MIT-licensed [EntryNav-Apps project](https://github.com/CallMeLewis/EntryNav-Apps).
+- **NBT-AAD** by nanaisu supplied the QNX Screen interface used by the full-screen renderer. [NBT-AAD source and license](https://github.com/Sq00ky/Supra-iDrive6-Android-Auto)
 
 ## iDrive menus
 
@@ -107,16 +107,5 @@ Choose **MHD+ Suite**, **Bootmod3 Suite**, or **MG Flasher**. [Download the dash
   <tr>
     <td><img src="images/bootmod3-active-sound.png" alt="Bootmod3 Active Sound" width="300"><br>Active Sound</td>
     <td><img src="images/bootmod3-burbles.png" alt="Bootmod3 Burbles" width="300"><br>Burbles</td>
-  </tr>
-</table>
-
-### HUD Gauges
-
-**Only tested on F3X vehicles**
-
-<table>
-  <tr>
-    <td><img src="images/03_hud_white.jpg" alt="HUD Gauges on an F3X windshield in white" width="300"></td>
-    <td><img src="images/04_hud_orange.jpg" alt="HUD Gauges on an F3X windshield in orange" width="300"></td>
   </tr>
 </table>
