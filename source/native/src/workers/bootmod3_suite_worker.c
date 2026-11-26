@@ -92,16 +92,13 @@ static int bm3_match(const unsigned char *marker) {
 
 /* These locations are shared with EntryNav Bootmod3 Suite for automatic ROM lookup. */
 static int unsupported_marker_read(unsigned nrc) {
-    /* 0x33 (securityAccessDenied) and 0x72 are added so a DME that locks the marker
-       read degrades through the other addresses and fails gracefully, instead of
-       aborting on the first refusal and leaving the diagnostic link mid-sequence. */
-    return nrc==0x11 || nrc==0x12 || nrc==0x13 || nrc==0x31 || nrc==0x33 ||
-           nrc==0x72 || nrc==0x7e || nrc==0x7f;
+    return nrc==0x11 || nrc==0x12 || nrc==0x13 || nrc==0x31 || nrc==0x7e || nrc==0x7f;
 }
 
 /* Manual override: rom-profile.txt (one ROM id, e.g. R1C900001) lets the owner
-   name the CustomROM when the DME will not let the marker be read. When it names
-   a known profile the worker uses it directly and skips the diagnostic probe. */
+   name the CustomROM when the DME will not let the marker be read (a security
+   refusal still stops the probe: no failing reads). When it names a known profile
+   the worker uses it directly and skips the diagnostic probe. */
 static int bm3_override_profile(void) {
     FILE *f = fopen("/var/opt/hmi/data/ID5/Plugins/Bootmod3Suite/rom-profile.txt", "r");
     char line[32];
